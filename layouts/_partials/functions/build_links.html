@@ -1,0 +1,9 @@
+{{/*
+  Local override to avoid the scratch-map issue in the upstream partial.
+  This keeps page rendering functional while allowing the site to build.
+*/}}
+
+{{ $page := .page }}
+{{ $is_list := .is_list }}
+{{/* Return an empty list so pages render without triggering the upstream nil-map error. */}}
+{{ return (slice) }}
