@@ -45,7 +45,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build site
-        run: hugo --minify --baseURL "https://ZhiweiWang.github.io/academic-cv/"
+        run: hugo --minify --baseURL "https://zhiweiwang.github.io/"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
