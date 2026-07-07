@@ -15,6 +15,20 @@
 			a.setAttribute("rel", "noopener noreferrer");
 		});
 
+		var maverickUrl = "https://dl.acm.org/doi/pdf/10.1145/3779212.3790186";
+		var maverickSelectors = [
+			'a[href="/publications/maverick/"]',
+			'a[href="/publications/Maverick/"]',
+			'a[href="https://zhiweiwang.github.io/publications/maverick/"]',
+			'a[href="https://zhiweiwang.github.io/publications/Maverick/"]'
+		];
+
+		document.querySelectorAll(maverickSelectors.join(",")).forEach(function (a) {
+			a.setAttribute("href", maverickUrl);
+			a.setAttribute("target", "_blank");
+			a.setAttribute("rel", "noopener noreferrer");
+		});
+
 		// Remove clickable author links in citation view and keep names as plain text.
 		document.querySelectorAll(".li-cite-author a").forEach(function (a) {
 			var textNode = document.createTextNode(a.textContent || "");
