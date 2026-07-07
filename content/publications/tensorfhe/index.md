@@ -1,6 +1,5 @@
 ---
-title: "Tensorfhe: Achieving practical computation on encrypted data using gpgpu"
-url: "https://arxiv.org/pdf/2212.14191"
+title: "[Tensorfhe: Achieving practical computation on encrypted data using gpgpu](https://arxiv.org/pdf/2212.14191)"
 authors:
   - Shengyu Fan
   - "**Zhiwei Wang**"
