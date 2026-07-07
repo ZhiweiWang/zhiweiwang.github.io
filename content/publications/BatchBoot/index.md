@@ -1,22 +1,24 @@
 ---
-title: "Chameleon: An efficient FHE scheme switching acceleration on GPUs"
+title: "BatchBoot: Fast Batched Bootstrapping for TFHE scheme and Practical Applications"
 authors:
-  - Zhiwei Wang
-  - Haoqi He
-  - Lutan Zhao
-  - Peinan Li
   - Zhihao Li
-  - Dan Meng
-  - Rui Hou
-date: 2025-01-01
+  - Hongyu Wang
+  - Yuan Zhao
+  - Lichun Li
+  - Zhiwei Wang
+  - Jiaxing He
+  - Changzheng Wei
+  - Ying Yan
+  - Lifeng Guo
+date: 2026-01-01
 publication_types: ['paper-conference']
 publication:
-  name: "2025 IEEE Transactions on Parallel and Distributed Systems. **TPDS 2025 Featured Article**"
+  name: "2026 The 35th USENIX Security Symposium. **USENIX Security 2026**"
 # abstract: "Short abstract here."
 # tags:
 #   - Fully Homomorphic Encryption
 links:
   - type: pdf
-    url: "https://ieeexplore.ieee.org/iel8/71/4359390/11146703.pdf"
+    url: "https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_li-zhihao.pdf"
 featured: true
 ---

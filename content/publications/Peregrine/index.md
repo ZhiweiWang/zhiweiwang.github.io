@@ -2,7 +2,7 @@
 title: "Peregrine: Accelerating TFHE Bootstrapping on GPUs via Multi-Level External Product Co-Design"
 authors:
   - Haoqi He
-  - Zhiwei Wang
+  - Zhiwei Wang*
   - Lutan Zhao
   - Dian Jiao
   - Dan Meng

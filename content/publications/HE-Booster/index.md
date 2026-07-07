@@ -1,24 +1,22 @@
 ---
-title: "BatchBoot: Fast Batched Bootstrapping for TFHE scheme and Practical Applications"
+title: "HE-Booster: an efficient polynomial arithmetic acceleration on GPUs for fully homomorphic encryption"
 authors:
-  - Zhihao Li
-  - Hongyu Wang
-  - Yuan Zhao
-  - Lichun Li
   - Zhiwei Wang
-  - Jiaxing He
-  - Changzheng Wei
-  - Ying Yan
-  - Lifeng Guo
-date: 2026-01-01
+  - Peinan Li
+  - Rui Hou
+  - Zhihao Li
+  - Jiangfeng Cao
+  - XiaoFeng Wang
+  - Dan Meng
+date: 2023-01-01
 publication_types: ['paper-conference']
 publication:
-  name: "2026 The 35th USENIX Security Symposium. **USENIX Security 2026**"
+  name: "2023 IEEE Transactions on Parallel and Distributed Systems. **TPDS 2023**"
 # abstract: "Short abstract here."
 # tags:
 #   - Fully Homomorphic Encryption
 links:
   - type: pdf
-    url: "https://www.usenix.org/system/files/conference/usenixsecurity26/sec26_prepub_li-zhihao.pdf"
+    url: "https://ieeexplore.ieee.org/iel7/71/4359390/10012383.pdf"
 featured: true
 ---
