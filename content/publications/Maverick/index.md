@@ -1,7 +1,12 @@
 ---
 title: "**Maverick: Rethinking TFHE Bootstrapping on GPUs via Algorithm-Hardware Co-Design**"
 authors:
-  Zhiwei Wang, Haoqi He, Lutan Zhao, Qingyun Niu, Dan Meng, Rui Hou
+  - Zhiwei Wang
+  - Haoqi He
+  - Lutan Zhao
+  - Qingyun Niu
+  - Dan Meng
+  - Rui Hou
 date: ""
 publication_types: ['paper-conference']
 publication:
