@@ -126,5 +126,16 @@
 			item.style.lineHeight = '1.75rem';
 			item.style.fontWeight = '700';
 		});
+
+		// Hide the Education block on the homepage bio section.
+		document.querySelectorAll('#section-resume-biography-3 h3').forEach(function (heading) {
+			if ((heading.textContent || '').trim() !== 'Education') {
+				return;
+			}
+			var educationBlock = heading.closest('div.mb-16');
+			if (educationBlock) {
+				educationBlock.style.display = 'none';
+			}
+		});
 	});
 </script>

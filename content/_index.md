@@ -31,12 +31,13 @@ sections:
         shape: circle # Options: circle (default), square, rounded
   - block: markdown
     content:
-      title: '📚 My Research'
+      title: '📚 Research Focus'
       subtitle: ''
       text: |-
-        My research aims to advance practical and scalable privacy-preserving computing by accelerating fully homomorphic encryption on modern GPU architectures. I focus on the co-design of cryptographic algorithms and hardware execution mechanisms, seeking to overcome the performance bottlenecks that prevent encrypted computation from being widely deployed in real-world systems. My work investigates efficient implementations of FHE primitives, including bootstrapping, polynomial arithmetic, ciphertext conversion, and key-dependent operations, across schemes such as TFHE and BGV/BFV/CKKS. Through computation restructuring, memory-access optimization, and coordinated use of CUDA Cores and Tensor Cores, I strive to transform FHE from a theoretically powerful but computationally expensive technique into a practical foundation for secure artificial intelligence, encrypted data analytics, and trustworthy computing infrastructures.
+        My research aims to advance practical and scalable privacy-preserving computing by accelerating fully homomorphic encryption on modern GPU architectures. I focus on the co-design of cryptographic algorithms and hardware execution mechanisms, seeking to overcome the performance bottlenecks that hinder the deployment of encrypted computation in real-world systems. My work investigates efficient implementations of FHE primitives, including bootstrapping, polynomial arithmetic, ciphertext conversion, and key-dependent operations, across schemes such as TFHE, BGV, BFV, and CKKS. Through computation restructuring, memory-access optimization, and the coordinated use of CUDA Cores and Tensor Cores, I strive to transform FHE from a theoretically powerful but computationally expensive technique into a practical foundation for secure artificial intelligence, encrypted data analytics, and trustworthy computing infrastructures.
 
-        Please reach out to collaborate 😃
+        We are always looking for motivated students interested in computer architecture, cryptography, and AI security. Feel free to contact us if you are interested in joining our group! 😃
+
     design:
       columns: '1'
   # - block: collection
