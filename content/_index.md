@@ -38,9 +38,7 @@ sections:
       title: '📚 My Research'
       subtitle: ''
       text: |-
-        Use this area to speak to your mission. I'm a research scientist in the Moonshot team at DeepMind. I blog about machine learning, deep learning, and moonshots.
-
-        I apply a range of qualitative and quantitative methods to comprehensively investigate the role of science and technology in the economy.
+        My research aims to advance practical and scalable privacy-preserving computing by accelerating fully homomorphic encryption on modern GPU architectures. I focus on the co-design of cryptographic algorithms and hardware execution mechanisms, seeking to overcome the performance bottlenecks that prevent encrypted computation from being widely deployed in real-world systems. My work investigates efficient implementations of FHE primitives, including bootstrapping, polynomial arithmetic, ciphertext conversion, and key-dependent operations, across schemes such as TFHE and BGV/BFV/CKKS. Through computation restructuring, memory-access optimization, and coordinated use of CUDA Cores and Tensor Cores, I strive to transform FHE from a theoretically powerful but computationally expensive technique into a practical foundation for secure artificial intelligence, encrypted data analytics, and trustworthy computing infrastructures.
 
         Please reach out to collaborate 😃
     design:
