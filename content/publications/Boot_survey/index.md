@@ -12,7 +12,7 @@ authors:
 date: 2026-01-01
 publication_types: ['paper-conference']
 publication:
-  name: "2026 Cybersecurity."
+  name: "2026 Cybersecurity"
 # abstract: "Short abstract here."
 # tags:
 #   - Fully Homomorphic Encryption
