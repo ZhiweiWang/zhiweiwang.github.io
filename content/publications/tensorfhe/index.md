@@ -1,5 +1,5 @@
 ---
-title: "Tensorfhe: Achieving practical computation on encrypted data using gpgpu"
+title: "[Tensorfhe: Achieving practical computation on encrypted data using gpgpu](https://arxiv.org/pdf/2212.14191)"
 authors:
   - Shengyu Fan
   - Zhiwei Wang
@@ -7,17 +7,17 @@ authors:
   - Rui Hou
   - Dan Meng
   - Mingzhe Zhang
-date: "2023-02-25"
+# date: "2023-02-25"
 publication_types: ['paper-conference']
 publication:
-  name: "2023 IEEE International Symposium on High-Performance Computer Architecture (HPCA)"
+  name: "2023 IEEE International Symposium on High-Performance Computer Architecture. **HPCA 2023**"
 abstract: "Short abstract here."
-tags:
-  - Fully Homomorphic Encryption
-links:
-  - type: pdf
-    url: "https://arxiv.org/pdf/2212.14191"
-featured: true
+# tags:
+#   - Fully Homomorphic Encryption
+# links:
+#   - type: pdf
+#     url: "https://arxiv.org/pdf/2212.14191"
+# featured: true
 ---
 
-Add the publication's full text or supplementary notes here.
+# Add the publication's full text or supplementary notes here.
