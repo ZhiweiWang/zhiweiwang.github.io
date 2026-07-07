@@ -29,10 +29,74 @@
 			a.setAttribute("rel", "noopener noreferrer");
 		});
 
+		var peregrineUrl = "https://ieeexplore.ieee.org/abstract/document/11408517/";
+		var peregrineSelectors = [
+			'a[href="/publications/peregrine/"]',
+			'a[href="/publications/Peregrine/"]',
+			'a[href="https://zhiweiwang.github.io/publications/peregrine/"]',
+			'a[href="https://zhiweiwang.github.io/publications/Peregrine/"]'
+		];
+
+		document.querySelectorAll(peregrineSelectors.join(",")).forEach(function (a) {
+			a.setAttribute("href", peregrineUrl);
+			a.setAttribute("target", "_blank");
+			a.setAttribute("rel", "noopener noreferrer");
+		});
+
+		var chameleonUrl = "https://ieeexplore.ieee.org/iel8/71/4359390/11146703.pdf";
+		var chameleonSelectors = [
+			'a[href="/publications/chameleon/"]',
+			'a[href="/publications/Chameleon/"]',
+			'a[href="https://zhiweiwang.github.io/publications/chameleon/"]',
+			'a[href="https://zhiweiwang.github.io/publications/Chameleon/"]'
+		];
+
+		document.querySelectorAll(chameleonSelectors.join(",")).forEach(function (a) {
+			a.setAttribute("href", chameleonUrl);
+			a.setAttribute("target", "_blank");
+			a.setAttribute("rel", "noopener noreferrer");
+		});
+
+		var neoUrl = "https://dl.acm.org/doi/pdf/10.1145/3695053.3731408";
+		var neoSelectors = [
+			'a[href="/publications/neo/"]',
+			'a[href="/publications/Neo/"]',
+			'a[href="https://zhiweiwang.github.io/publications/neo/"]',
+			'a[href="https://zhiweiwang.github.io/publications/Neo/"]'
+		];
+
+		document.querySelectorAll(neoSelectors.join(",")).forEach(function (a) {
+			a.setAttribute("href", neoUrl);
+			a.setAttribute("target", "_blank");
+			a.setAttribute("rel", "noopener noreferrer");
+		});
+
+		var shiftpirUrl = "https://dl.acm.org/doi/pdf/10.1145/3719027.3765153";
+		var shiftpirSelectors = [
+			'a[href="/publications/shiftpir/"]',
+			'a[href="/publications/ShiftPIR/"]',
+			'a[href="https://zhiweiwang.github.io/publications/shiftpir/"]',
+			'a[href="https://zhiweiwang.github.io/publications/ShiftPIR/"]'
+		];
+
+		document.querySelectorAll(shiftpirSelectors.join(",")).forEach(function (a) {
+			a.setAttribute("href", shiftpirUrl);
+			a.setAttribute("target", "_blank");
+			a.setAttribute("rel", "noopener noreferrer");
+		});
+
 		// Remove clickable author links in citation view and keep names as plain text.
 		document.querySelectorAll(".li-cite-author a").forEach(function (a) {
 			var textNode = document.createTextNode(a.textContent || "");
 			a.replaceWith(textNode);
+		});
+
+		// Bold only the target author name in publication citation author lines.
+		document.querySelectorAll(".li-cite-author").forEach(function (authorLine) {
+			authorLine.innerHTML = authorLine.innerHTML.replace(
+				/\bZhiwei Wang\b/g,
+				"<strong>Zhiwei Wang</strong>"
+			);
 		});
 
 		// Remove footnote-like markers such as (0001).
