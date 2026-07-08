@@ -5,7 +5,7 @@ authors:
   - Hongyu Wang
   - Yuan Zhao
   - Lichun Li
-  - Zhiwei Wang
+  - Zhiwei Wang*
   - Jiaxing He
   - Changzheng Wei
   - Ying Yan

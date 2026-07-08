@@ -34,9 +34,9 @@ sections:
       title: '📚 Research Focus'
       subtitle: ''
       text: |-
-        My research aims to advance practical and scalable privacy-preserving computing by accelerating fully homomorphic encryption on modern GPU architectures. I focus on the co-design of cryptographic algorithms and hardware execution mechanisms, seeking to overcome the performance bottlenecks that hinder the deployment of encrypted computation in real-world systems. My work investigates efficient implementations of FHE primitives, including bootstrapping, polynomial arithmetic, ciphertext conversion, and key-dependent operations, across schemes such as TFHE, BGV, BFV, and CKKS. Through computation restructuring, memory-access optimization, and the coordinated use of CUDA Cores and Tensor Cores, I strive to transform FHE from a theoretically powerful but computationally expensive technique into a practical foundation for secure artificial intelligence, encrypted data analytics, and trustworthy computing infrastructures.
+        My research aims to make privacy-preserving computing practical and scalable by advancing fully homomorphic encryption (FHE) on modern GPU architectures. I study cross-layer algorithm–architecture co-design, spanning cryptographic operators, algorithms, and privacy-preserving applications, to bridge the gap between cryptographic theory and efficient hardware execution. Through computation restructuring, memory-access optimization, and coordinated use of CUDA Cores and Tensor Cores, my goal is to transform FHE from a computationally expensive cryptographic primitive into a practical foundation for secure AI, encrypted data analytics, and trustworthy computing.
 
-        We are always looking for motivated students interested in computer architecture, cryptography, and AI security. Feel free to contact us if you are interested in joining our group! 😃
+        *We are always looking for motivated students interested in computer architecture, cryptography, and AI security. Feel free to contact us if you are interested in joining our group!* 😃
 
     design:
       columns: '1'
