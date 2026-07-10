@@ -36,7 +36,7 @@ sections:
       text: |-
         My research aims to make privacy-preserving computing practical and scalable by advancing fully homomorphic encryption (FHE) on modern GPU architectures. I study cross-layer algorithm–architecture co-design, spanning *operators*, *algorithms*, and *systems*, to bridge the gap between cryptographic theory and efficient hardware execution. Through computation restructuring, memory-access optimization, and the coordinated use of CUDA Cores and Tensor Cores, my goal is to transform FHE from a computationally expensive cryptographic primitive into a practical foundation for secure AI, encrypted data analytics, and trustworthy computing.
 
-        *We are always looking for motivated students interested in computer architecture, cryptography, and AI security. Feel free to contact us if you are interested in joining our group!* 😃
+        *We welcome highly motivated master’s and Ph.D. students with research interests in computer architecture, cryptography, and privacy-preserving computing. Students who are eager to pursue cutting-edge research at the intersection of algorithms, systems, and hardware are encouraged to contact us and apply to join our group!* 😃
 
     design:
       columns: '1'
