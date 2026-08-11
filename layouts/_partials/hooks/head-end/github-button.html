@@ -61,6 +61,16 @@
 		});
 
 		// Group citation items by publication year and show newest year first.
+		function getPublicationSlug(item) {
+			var titleLink = item.querySelector('a[href*="/publications/"]') || item.querySelector("a");
+			if (!titleLink) {
+				return "";
+			}
+			var href = titleLink.getAttribute("href") || "";
+			var m = href.match(/\/publications\/([^\/#?]+)\/?/i);
+			return m && m[1] ? m[1].toLowerCase() : "";
+		}
+
 		var citationItems = Array.from(document.querySelectorAll(".pub-list-item.view-citation"));
 		var parentToItems = new Map();
 		citationItems.forEach(function (item) {
@@ -100,22 +110,25 @@
 				return parseInt(b, 10) - parseInt(a, 10);
 			});
 
-			parent.innerHTML = "";
-			years.forEach(function (year) {
-				var heading = document.createElement("div");
-				heading.className = "pub-year-heading";
-				heading.style.margin = "0.75rem 0 0.25rem";
-				heading.style.fontWeight = "700";
-				heading.style.fontSize = "1.125rem";
-				heading.textContent = year;
-				parent.appendChild(heading);
+			var publicationOrderBySlug = {
+				tfheshield: 1,
+				decouple: 2,
+				batchboot: 3,
+				herds: 4,
+				maverick: 5,
+				mnemos: 6,
+				peregrine: 7,
+				boot_survey: 8,
+				bootsurvey: 8,
+				shiftpir: 9,
+				neo: 10,
+				chameleon: 11,
+				tches2024: 12,
+				nttfusion: 13,
+				"he-booster": 14,
+				tensorfhe: 15
+			};
 
-				groups[year].forEach(function (item) {
-					parent.appendChild(item);
-				});
-			});
-
-			var orderedItems = Array.from(parent.querySelectorAll(".pub-list-item.view-citation"));
 			var publicationSerialBySlug = {
 				boot_survey: 13,
 				bootsurvey: 13,
@@ -130,19 +143,47 @@
 				tches2024: 4,
 				nttfusion: 3,
 				"he-booster": 2,
-				tensorfhe: 1
+				tensorfhe: 1,
+				tfheshield: 14,
+				decouple: 13
 			};
+
+			parent.innerHTML = "";
+			years.forEach(function (year) {
+				var heading = document.createElement("div");
+				heading.className = "pub-year-heading";
+				heading.style.margin = "0.75rem 0 0.25rem";
+				heading.style.fontWeight = "700";
+				heading.style.fontSize = "1.125rem";
+				heading.textContent = year;
+				parent.appendChild(heading);
+
+				var orderedYearItems = groups[year].slice().sort(function (a, b) {
+					var aSlug = getPublicationSlug(a);
+					var bSlug = getPublicationSlug(b);
+					var aRank = aSlug && Object.prototype.hasOwnProperty.call(publicationOrderBySlug, aSlug) ? publicationOrderBySlug[aSlug] : 999;
+					var bRank = bSlug && Object.prototype.hasOwnProperty.call(publicationOrderBySlug, bSlug) ? publicationOrderBySlug[bSlug] : 999;
+					if (aRank !== bRank) {
+						return aRank - bRank;
+					}
+					var aTitle = (a.textContent || "").replace(/\s+/g, " ").trim();
+					var bTitle = (b.textContent || "").replace(/\s+/g, " ").trim();
+					return aTitle.localeCompare(bTitle);
+				});
+
+				orderedYearItems.forEach(function (item) {
+					parent.appendChild(item);
+				});
+			});
+
+			var orderedItems = Array.from(parent.querySelectorAll(".pub-list-item.view-citation"));
 			orderedItems.forEach(function (item, idx) {
 				var titleLink = item.querySelector('a[href*="/publications/"]') || item.querySelector("a");
 				var serialValue = 13 - idx;
 				if (titleLink) {
-					var href = titleLink.getAttribute("href") || "";
-					var m = href.match(/\/publications\/([^\/#?]+)\/?/i);
-					if (m && m[1]) {
-						var slug = m[1].toLowerCase();
-						if (Object.prototype.hasOwnProperty.call(publicationSerialBySlug, slug)) {
-							serialValue = publicationSerialBySlug[slug];
-						}
+					var slug = getPublicationSlug(item);
+					if (slug && Object.prototype.hasOwnProperty.call(publicationSerialBySlug, slug)) {
+						serialValue = publicationSerialBySlug[slug];
 					}
 					titleLink.innerHTML = (titleLink.innerHTML || "").replace(/^\s*\[\d+\]\s*/, "");
 				}
