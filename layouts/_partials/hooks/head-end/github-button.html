@@ -129,25 +129,6 @@
 				tensorfhe: 15
 			};
 
-			var publicationSerialBySlug = {
-				boot_survey: 13,
-				bootsurvey: 13,
-				batchboot: 12,
-				herds: 11,
-				maverick: 10,
-				mnemos: 9,
-				peregrine: 8,
-				shiftpir: 7,
-				neo: 6,
-				chameleon: 5,
-				tches2024: 4,
-				nttfusion: 3,
-				"he-booster": 2,
-				tensorfhe: 1,
-				tfheshield: 14,
-				decouple: 13
-			};
-
 			parent.innerHTML = "";
 			years.forEach(function (year) {
 				var heading = document.createElement("div");
@@ -179,12 +160,8 @@
 			var orderedItems = Array.from(parent.querySelectorAll(".pub-list-item.view-citation"));
 			orderedItems.forEach(function (item, idx) {
 				var titleLink = item.querySelector('a[href*="/publications/"]') || item.querySelector("a");
-				var serialValue = 13 - idx;
+				var serialValue = idx + 1;
 				if (titleLink) {
-					var slug = getPublicationSlug(item);
-					if (slug && Object.prototype.hasOwnProperty.call(publicationSerialBySlug, slug)) {
-						serialValue = publicationSerialBySlug[slug];
-					}
 					titleLink.innerHTML = (titleLink.innerHTML || "").replace(/^\s*\[\d+\]\s*/, "");
 				}
 
