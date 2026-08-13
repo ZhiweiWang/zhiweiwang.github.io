@@ -158,9 +158,10 @@
 			});
 
 			var orderedItems = Array.from(parent.querySelectorAll(".pub-list-item.view-citation"));
+			var totalCount = orderedItems.length;
 			orderedItems.forEach(function (item, idx) {
 				var titleLink = item.querySelector('a[href*="/publications/"]') || item.querySelector("a");
-				var serialValue = idx + 1;
+				var serialValue = totalCount - idx;
 				if (titleLink) {
 					titleLink.innerHTML = (titleLink.innerHTML || "").replace(/^\s*\[\d+\]\s*/, "");
 				}
