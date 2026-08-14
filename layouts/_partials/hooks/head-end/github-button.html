@@ -25,6 +25,7 @@
 				return;
 			}
 			var slug = m[1].toLowerCase();
+			a.setAttribute("data-pub-slug", slug);
 			var targetUrl = publicationLinkMap[slug];
 			if (!targetUrl) {
 				return;
@@ -65,6 +66,10 @@
 			var titleLink = item.querySelector('a[href*="/publications/"]') || item.querySelector("a");
 			if (!titleLink) {
 				return "";
+			}
+			var slugFromDataset = (titleLink.getAttribute("data-pub-slug") || "").toLowerCase();
+			if (slugFromDataset) {
+				return slugFromDataset;
 			}
 			var href = titleLink.getAttribute("href") || "";
 			var m = href.match(/\/publications\/([^\/#?]+)\/?/i);
@@ -129,6 +134,14 @@
 				tensorfhe: 15
 			};
 
+			var totalPublicationCount = Object.keys(publicationOrderBySlug).reduce(function (maxRank, slug) {
+				var rank = publicationOrderBySlug[slug];
+				if (typeof rank === "number" && isFinite(rank)) {
+					return Math.max(maxRank, rank);
+				}
+				return maxRank;
+			}, 0);
+
 			parent.innerHTML = "";
 			years.forEach(function (year) {
 				var heading = document.createElement("div");
@@ -161,7 +174,13 @@
 			var totalCount = orderedItems.length;
 			orderedItems.forEach(function (item, idx) {
 				var titleLink = item.querySelector('a[href*="/publications/"]') || item.querySelector("a");
-				var serialValue = totalCount - idx;
+				var slug = getPublicationSlug(item);
+				var rank = slug && Object.prototype.hasOwnProperty.call(publicationOrderBySlug, slug)
+					? publicationOrderBySlug[slug]
+					: null;
+				var serialValue = rank !== null && totalPublicationCount > 0
+					? totalPublicationCount - rank + 1
+					: totalCount - idx;
 				if (titleLink) {
 					titleLink.innerHTML = (titleLink.innerHTML || "").replace(/^\s*\[\d+\]\s*/, "");
 				}
