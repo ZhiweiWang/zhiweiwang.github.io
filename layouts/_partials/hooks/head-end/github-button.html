@@ -77,14 +77,14 @@
 		}
 
 
-		var globalOrderBySlug = {
-			{{- $sortedPubPages := sort (where .Site.RegularPages "Section" "publications") "Date" "desc" -}}
-			{{- range $idx, $pub := $sortedPubPages -}}
-			{{- $slug := replaceRE "^.*/publications/([^/]+)/$" "$1" $pub.RelPermalink -}}
-			"{{ lower $slug }}": {{ add $idx 1 }},
+		var publicationOrderBySlug = {
+			{{- $allPubPages := sort (where .Site.RegularPages "Section" "publications") "Date" "desc" -}}
+			{{- range $idx, $pub := $allPubPages -}}
+			{{- $slug := lower (path.Base (strings.TrimSuffix $pub.RelPermalink "/")) -}}
+			"{{ $slug }}": {{ add $idx 1 }},
 			{{- end -}}
 		};
-		var totalPublicationCount = {{ len $sortedPubPages }};
+		var totalPublicationCount = {{ len $allPubPages }};
 
 		var citationItems = Array.from(document.querySelectorAll(".pub-list-item.view-citation"));
 		var parentToItems = new Map();
@@ -142,13 +142,10 @@
 					var orderedYearItems = groups[year].slice().sort(function (a, b) {
 						var aSlug = getPublicationSlug(a);
 						var bSlug = getPublicationSlug(b);
-						var hasARank = aSlug && Object.prototype.hasOwnProperty.call(globalOrderBySlug, aSlug);
-						var hasBRank = bSlug && Object.prototype.hasOwnProperty.call(globalOrderBySlug, bSlug);
-						if (hasARank && hasBRank) {
-							return globalOrderBySlug[aSlug] - globalOrderBySlug[bSlug];
-						}
-						if (hasARank) {
-							return -1;
+					var hasARank = aSlug && Object.prototype.hasOwnProperty.call(publicationOrderBySlug, aSlug);
+					var hasBRank = bSlug && Object.prototype.hasOwnProperty.call(publicationOrderBySlug, bSlug);
+					if (hasARank && hasBRank) {
+						return publicationOrderBySlug[aSlug] - publicationOrderBySlug[bSlug];
 						}
 						if (hasBRank) {
 							return 1;
@@ -166,9 +163,9 @@
 				orderedItems.forEach(function (item, idx) {
 					var titleLink = item.querySelector('a[href*="/publications/"]') || item.querySelector("a");
 					var slug = getPublicationSlug(item);
-					var hasRank = slug && Object.prototype.hasOwnProperty.call(globalOrderBySlug, slug);
+					var hasRank = slug && Object.prototype.hasOwnProperty.call(publicationOrderBySlug, slug);
 					var serialValue = hasRank && totalPublicationCount > 0
-						? totalPublicationCount - globalOrderBySlug[slug] + 1
+						? totalPublicationCount - publicationOrderBySlug[slug] + 1
 						: pageCount - idx;
 					if (titleLink) {
 						titleLink.innerHTML = (titleLink.innerHTML || "").replace(/^\s*\[\d+\]\s*/, "");
