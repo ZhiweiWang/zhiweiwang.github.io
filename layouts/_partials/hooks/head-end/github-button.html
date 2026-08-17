@@ -76,6 +76,16 @@
 			return m && m[1] ? m[1].toLowerCase() : "";
 		}
 
+
+		var globalOrderBySlug = {
+			{{- $sortedPubPages := sort (where .Site.RegularPages "Section" "publications") "Date" "desc" -}}
+			{{- range $idx, $pub := $sortedPubPages -}}
+			{{- $slug := replaceRE "^.*/publications/([^/]+)/$" "$1" $pub.RelPermalink -}}
+			"{{ lower $slug }}": {{ add $idx 1 }},
+			{{- end -}}
+		};
+		var totalPublicationCount = {{ len $sortedPubPages }};
+
 		var citationItems = Array.from(document.querySelectorAll(".pub-list-item.view-citation"));
 		var parentToItems = new Map();
 		citationItems.forEach(function (item) {
@@ -93,109 +103,88 @@
 			if (items.length === 0) {
 				return;
 			}
+				var itemOriginalIndex = new Map();
+				items.forEach(function (item, idx) {
+					itemOriginalIndex.set(item, idx);
+				});
 
-			var groups = {};
-			items.forEach(function (item) {
-				var yearText = (item.querySelector("em") || item).textContent || "";
-				var yearMatch = yearText.match(/\b(19|20)\d{2}\b/);
-				var year = yearMatch ? yearMatch[0] : "Other";
-				if (!groups[year]) {
-					groups[year] = [];
-				}
-				groups[year].push(item);
-			});
-
-			var years = Object.keys(groups).sort(function (a, b) {
-				if (a === "Other") {
-					return 1;
-				}
-				if (b === "Other") {
-					return -1;
-				}
-				return parseInt(b, 10) - parseInt(a, 10);
-			});
-
-			var publicationOrderBySlug = {
-				tfheshield: 1,
-				decouple: 2,
-				batchboot: 3,
-				herds: 4,
-				maverick: 5,
-				mnemos: 6,
-				peregrine: 7,
-				boot_survey: 8,
-				bootsurvey: 8,
-				shiftpir: 9,
-				neo: 10,
-				chameleon: 11,
-				tches2024: 12,
-				nttfusion: 13,
-				"he-booster": 14,
-				tensorfhe: 15
-			};
-
-			var totalPublicationCount = Object.keys(publicationOrderBySlug).reduce(function (maxRank, slug) {
-				var rank = publicationOrderBySlug[slug];
-				if (typeof rank === "number" && isFinite(rank)) {
-					return Math.max(maxRank, rank);
-				}
-				return maxRank;
-			}, 0);
-
-			parent.innerHTML = "";
-			years.forEach(function (year) {
-				var heading = document.createElement("div");
-				heading.className = "pub-year-heading";
-				heading.style.margin = "0.75rem 0 0.25rem";
-				heading.style.fontWeight = "700";
-				heading.style.fontSize = "1.125rem";
-				heading.textContent = year;
-				parent.appendChild(heading);
-
-				var orderedYearItems = groups[year].slice().sort(function (a, b) {
-					var aSlug = getPublicationSlug(a);
-					var bSlug = getPublicationSlug(b);
-					var aRank = aSlug && Object.prototype.hasOwnProperty.call(publicationOrderBySlug, aSlug) ? publicationOrderBySlug[aSlug] : 999;
-					var bRank = bSlug && Object.prototype.hasOwnProperty.call(publicationOrderBySlug, bSlug) ? publicationOrderBySlug[bSlug] : 999;
-					if (aRank !== bRank) {
-						return aRank - bRank;
+				var groups = {};
+				items.forEach(function (item) {
+					var yearText = (item.querySelector("em") || item).textContent || "";
+					var yearMatch = yearText.match(/\b(19|20)\d{2}\b/);
+					var year = yearMatch ? yearMatch[0] : "Other";
+					if (!groups[year]) {
+						groups[year] = [];
 					}
-					var aTitle = (a.textContent || "").replace(/\s+/g, " ").trim();
-					var bTitle = (b.textContent || "").replace(/\s+/g, " ").trim();
-					return aTitle.localeCompare(bTitle);
+					groups[year].push(item);
 				});
 
-				orderedYearItems.forEach(function (item) {
-					parent.appendChild(item);
+				var years = Object.keys(groups).sort(function (a, b) {
+					if (a === "Other") {
+						return 1;
+					}
+					if (b === "Other") {
+						return -1;
+					}
+					return parseInt(b, 10) - parseInt(a, 10);
+				});
+
+				parent.innerHTML = "";
+				years.forEach(function (year) {
+					var heading = document.createElement("div");
+					heading.className = "pub-year-heading";
+					heading.style.margin = "0.75rem 0 0.25rem";
+					heading.style.fontWeight = "700";
+					heading.style.fontSize = "1.125rem";
+					heading.textContent = year;
+					parent.appendChild(heading);
+
+					var orderedYearItems = groups[year].slice().sort(function (a, b) {
+						var aSlug = getPublicationSlug(a);
+						var bSlug = getPublicationSlug(b);
+						var hasARank = aSlug && Object.prototype.hasOwnProperty.call(globalOrderBySlug, aSlug);
+						var hasBRank = bSlug && Object.prototype.hasOwnProperty.call(globalOrderBySlug, bSlug);
+						if (hasARank && hasBRank) {
+							return globalOrderBySlug[aSlug] - globalOrderBySlug[bSlug];
+						}
+						if (hasARank) {
+							return -1;
+						}
+						if (hasBRank) {
+							return 1;
+						}
+						return (itemOriginalIndex.get(a) || 0) - (itemOriginalIndex.get(b) || 0);
+					});
+
+					orderedYearItems.forEach(function (item) {
+						parent.appendChild(item);
+					});
+				});
+
+				var orderedItems = Array.from(parent.querySelectorAll(".pub-list-item.view-citation"));
+				var pageCount = orderedItems.length;
+				orderedItems.forEach(function (item, idx) {
+					var titleLink = item.querySelector('a[href*="/publications/"]') || item.querySelector("a");
+					var slug = getPublicationSlug(item);
+					var hasRank = slug && Object.prototype.hasOwnProperty.call(globalOrderBySlug, slug);
+					var serialValue = hasRank && totalPublicationCount > 0
+						? totalPublicationCount - globalOrderBySlug[slug] + 1
+						: pageCount - idx;
+					if (titleLink) {
+						titleLink.innerHTML = (titleLink.innerHTML || "").replace(/^\s*\[\d+\]\s*/, "");
+					}
+
+					var oldSerial = item.querySelector(".pub-serial-index");
+					if (oldSerial) {
+						oldSerial.remove();
+					}
+
+					var serial = document.createElement("span");
+					serial.className = "pub-serial-index";
+					serial.textContent = "[" + serialValue + "] ";
+					item.insertBefore(serial, item.firstChild);
 				});
 			});
-
-			var orderedItems = Array.from(parent.querySelectorAll(".pub-list-item.view-citation"));
-			var totalCount = orderedItems.length;
-			orderedItems.forEach(function (item, idx) {
-				var titleLink = item.querySelector('a[href*="/publications/"]') || item.querySelector("a");
-				var slug = getPublicationSlug(item);
-				var rank = slug && Object.prototype.hasOwnProperty.call(publicationOrderBySlug, slug)
-					? publicationOrderBySlug[slug]
-					: null;
-				var serialValue = rank !== null && totalPublicationCount > 0
-					? totalPublicationCount - rank + 1
-					: totalCount - idx;
-				if (titleLink) {
-					titleLink.innerHTML = (titleLink.innerHTML || "").replace(/^\s*\[\d+\]\s*/, "");
-				}
-
-				var oldSerial = item.querySelector(".pub-serial-index");
-				if (oldSerial) {
-					oldSerial.remove();
-				}
-
-				var serial = document.createElement("span");
-				serial.className = "pub-serial-index";
-				serial.textContent = "[" + serialValue + "] ";
-				item.insertBefore(serial, item.firstChild);
-			});
-		});
 
 		// Match Interests keywords to the author bio text scale.
 		document.querySelectorAll('#section-resume-biography-3 .flex.flex-wrap.gap-3 .inline-block').forEach(function (item) {
